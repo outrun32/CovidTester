@@ -31,14 +31,13 @@ predicter = Predicter()
 
 @app.route("/", methods=['GET', 'POST'])
 def upload_file():
-    if request.method == "POST":
-        if request.files:
-            image = request.files["image"]
-            img = Image.open(image)
-            img = np.array(img)
-            img = cv2.resize(img, (224, 224))
-            img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
-            return str(predicter.predict_image(img))
+    if request.method == "POST" and request.files:
+        image = request.files["image"]
+        img = Image.open(image)
+        img = np.array(img)
+        img = cv2.resize(img, (224, 224))
+        img = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2RGB)
+        return str(predicter.predict_image(img))
     return render_template(TEMPLATE_FILE)
 
 app.run()
