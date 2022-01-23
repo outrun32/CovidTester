@@ -11,10 +11,7 @@ class Predicter:
     model = tf.keras.models.load_model(MODEL_PATH)
 
     def get_class_index_name(self, index):
-        if index == 1:
-            return "Covid не обнаружен"
-        else:
-            return "Covid обнаружен"
+        return "Covid не обнаружен" if index == 1 else "Covid обнаружен"
 
     def predict_image(self, image):
         img = np.expand_dims(image, axis=0)
